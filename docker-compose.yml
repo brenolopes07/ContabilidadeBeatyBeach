@@ -1,0 +1,25 @@
+
+
+services:
+  mysql:
+    image: mysql:8.3
+    container_name: mysql_contabilidade_salao
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ContabilidadeSalao
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - horas-extras-network
+
+volumes:
+  mysql_data:
+
+networks:
+  horas-extras-network:
+    driver: bridge
