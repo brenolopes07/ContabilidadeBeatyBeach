@@ -10,6 +10,6 @@ namespace ContabilidadeBeatyBeach.Domain.Entity
         public TipoDeExtra Tipo { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public Usuarios User { get; set; }
     }
 }

@@ -2,11 +2,12 @@
 
 namespace ContabilidadeBeatyBeach.Domain.Entity
 {
-    public class User
+    public class Usuarios
     {
         [Key]
         public int Id { get; set; }
         [MaxLength(128)]
+        [Required]
         public string Username { get; set; }
         public decimal SalarioMensal { get; set; }
 

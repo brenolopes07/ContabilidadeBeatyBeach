@@ -8,6 +8,6 @@
         public decimal TotalExtra { get; set; }
 
         public int UsuarioId { get; set; }
-        public User Usuario { get; set; }
+        public Usuarios Usuario { get; set; }
     }
 }
