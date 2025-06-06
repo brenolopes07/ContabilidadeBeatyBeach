@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContabilidadeBeatyBeach.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250605044954_InitialDb")]
-    partial class InitialDb
+    [Migration("20250606004102_InitialDB")]
+    partial class InitialDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,6 +103,9 @@ namespace ContabilidadeBeatyBeach.Migrations
                         .HasColumnType("varchar(128)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

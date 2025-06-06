@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ContabilidadeBeatyBeach.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class InitialDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,6 +88,12 @@ namespace ContabilidadeBeatyBeach.Migrations
                 name: "IX_ResumoMensal_UsuarioId",
                 table: "ResumoMensal",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Username",
+                table: "Usuarios",
+                column: "Username",
+                unique: true);
         }
 
         /// <inheritdoc />

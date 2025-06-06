@@ -7,7 +7,7 @@ namespace ContabilidadeBeatyBeach.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<User> Usuarios { get; set; }   
+        public DbSet<Usuarios> Usuarios { get; set; }   
         public DbSet<HoraExtra> HoraExtra { get; set; }
         public DbSet<ResumoMensal> ResumoMensal { get; set; }
 
@@ -15,12 +15,15 @@ namespace ContabilidadeBeatyBeach.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Usuarios>(entity =>
             {
                 entity.HasKey(u => u.Id);
                 entity.Property(u => u.Username)
                     .IsRequired()
                     .HasMaxLength(128);
+
+                entity.HasIndex(u => u.Username)
+                    .IsUnique();
 
                 entity.Property(u => u.SalarioMensal)
                     .IsRequired()
