@@ -37,6 +37,7 @@ namespace ContabilidadeBeatyBeach.Service
                 Tipo = h.Tipo.ToString(""),
                 QuantidadeHoras = h.QuantidadeHoras,
                 ValorHoraExtra = valorHora,
+                ValorCaculado = h.QuantidadeHoras * valorHora
             }).ToList();
 
             return new CalculoSalarioDTO
