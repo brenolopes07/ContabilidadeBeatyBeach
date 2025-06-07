@@ -18,6 +18,21 @@ namespace ContabilidadeBeatyBeach.Service
             return await _userRepository.ObterPorIdAsync(id);
         }
 
+        public async Task<Usuarios> ObterOuCriar(string username, decimal salarioMensal)
+        {
+            var user = await _userRepository.ObterPorUsernameAsync(username);
+            if (user != null)
+                return user;
+
+            var novoUsuario = new Usuarios
+            {
+                Username = username,
+                SalarioMensal = salarioMensal
+            };
+
+            return await _userRepository.AdicionarAsync(novoUsuario);
+        }
+
         public decimal CalcularValorHora(decimal salarioMensal)
         {
             return salarioMensal / 30 / 8;
