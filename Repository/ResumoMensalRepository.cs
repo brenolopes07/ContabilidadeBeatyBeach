@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadeBeatyBeach.Repository
 {
-    public class ResumoMensalRepository : IResumoMensal
+    public class ResumoMensalRepository : IResumoMensalRepository
     {
         private readonly AppDbContext _context;
 
@@ -13,16 +13,16 @@ namespace ContabilidadeBeatyBeach.Repository
         {
             _context = context;
         }
-        public async Task<ResumoMensal?> ObterPorUsuarioEMesAsync(int usuarioId, string mes)
+        public async Task<ResumoMensal?> ObterPorUsuarioEMesAsync(int UserId, string mes)
         {
             return await _context.ResumoMensal
-                .FirstOrDefaultAsync(r => r.UsuarioId == usuarioId && r.Mes == mes);
+                .FirstOrDefaultAsync(r => r.UserId == UserId && r.Mes == mes);
         }
 
-        public async Task<List<ResumoMensal>> ObterPorUsuarioAsync(int usuarioId)
+        public async Task<List<ResumoMensal>> ObterPorUsuarioAsync(int UserId)
         {
             return await _context.ResumoMensal
-                .Where(r => r.UsuarioId == usuarioId)
+                .Where(r => r.UserId == UserId)
                 .OrderByDescending(r => r.Mes)
                 .ToListAsync();
         }

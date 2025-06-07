@@ -2,11 +2,11 @@
 
 namespace ContabilidadeBeatyBeach.Repository.Interface
 {
-    public interface IResumoMensal
+    public interface IResumoMensalRepository
     {
-        Task<ResumoMensal?> ObterPorUsuarioEMesAsync (int usuarioId, string mesAno);
+        Task<ResumoMensal?> ObterPorUsuarioEMesAsync (int UserId, string mesAno);
 
-        Task<List<ResumoMensal>> ObterPorUsuarioAsync(int usuarioId);
+        Task<List<ResumoMensal>> ObterPorUsuarioAsync(int UserId);
 
         Task<ResumoMensal> CriarAsync(ResumoMensal resumoMensal);
 
