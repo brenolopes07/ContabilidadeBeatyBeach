@@ -40,7 +40,7 @@ namespace ContabilidadeBeatyBeach.Data
 
                 entity.HasMany(u => u.ResumoMensal)
                     .WithOne(r => r.Usuario)
-                    .HasForeignKey(r => r.UsuarioId)
+                    .HasForeignKey(r => r.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
 

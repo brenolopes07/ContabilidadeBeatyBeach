@@ -87,7 +87,7 @@ namespace ContabilidadeBeatyBeach.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ResumoMensal_UsuarioId",
                 table: "ResumoMensal",
-                column: "UsuarioId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_Username",

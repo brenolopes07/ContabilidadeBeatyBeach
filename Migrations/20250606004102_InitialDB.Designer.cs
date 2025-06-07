@@ -71,12 +71,12 @@ namespace ContabilidadeBeatyBeach.Migrations
                     b.Property<decimal>("TotalHoras")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ResumoMensal");
                 });
@@ -125,7 +125,7 @@ namespace ContabilidadeBeatyBeach.Migrations
                 {
                     b.HasOne("ContabilidadeBeatyBeach.Domain.Entity.User", "Usuario")
                         .WithMany("ResumoMensal")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
