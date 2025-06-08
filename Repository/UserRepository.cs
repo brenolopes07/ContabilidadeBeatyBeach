@@ -16,7 +16,9 @@ namespace ContabilidadeBeatyBeach.Repository
 
         public async Task<Usuarios> ObterPorIdAsync(int id)
         {
-            return await _context.Usuarios.FindAsync(id);
+            return await _context.Usuarios
+            .Include(u => u.HoraExtras)
+            .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuarios> ObterPorUsernameAsync(string username)
