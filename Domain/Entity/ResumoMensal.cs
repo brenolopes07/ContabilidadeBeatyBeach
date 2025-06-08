@@ -7,7 +7,7 @@
         public decimal TotalHoras { get; set; }
         public decimal TotalExtra { get; set; }
 
-        public int UsuarioId { get; set; }
+        public int UserId { get; set; }
         public Usuarios Usuario { get; set; }
     }
 }
