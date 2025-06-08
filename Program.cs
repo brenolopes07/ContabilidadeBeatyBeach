@@ -1,4 +1,8 @@
 using ContabilidadeBeatyBeach.Data;
+using ContabilidadeBeatyBeach.Repository;
+using ContabilidadeBeatyBeach.Repository.Interface;
+using ContabilidadeBeatyBeach.Service;
+using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     )
 );
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IHoraExtraService, HoraExtraService>();
+builder.Services.AddControllers();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IHoraExtraRepository, HoraExtraRepository>();
 
 
 var app = builder.Build();
