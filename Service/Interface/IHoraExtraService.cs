@@ -6,5 +6,7 @@ namespace ContabilidadeBeatyBeach.Service.Interface
     {
         Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string data);
         (decimal totalHoras, decimal totalValor) CalcularValores(List<HoraExtra> horasExtras, decimal valorHora);
+
+        Task<HoraExtra> AdicionarHoraExtraAsync(HoraExtra horaExtra);
     }
 }

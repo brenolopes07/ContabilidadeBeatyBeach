@@ -14,6 +14,12 @@ namespace ContabilidadeBeatyBeach.Service
             _horaextrarepository = horaextrarepository;
         }
 
+        public async Task<HoraExtra> AdicionarHoraExtraAsync(HoraExtra horaExtra)
+        {
+            return await _horaextrarepository.CriarAsync(horaExtra);
+        }
+
+
         public async Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string data)
         {
             return await _horaextrarepository.ObterPorUsuarioEMesAsync(userId, data);
@@ -36,5 +42,7 @@ namespace ContabilidadeBeatyBeach.Service
             }
             return (totalHoras, totalValor);
         }
+
+        
     }
 }

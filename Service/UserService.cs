@@ -1,4 +1,5 @@
-﻿using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
 
@@ -18,16 +19,16 @@ namespace ContabilidadeBeatyBeach.Service
             return await _userRepository.ObterPorIdAsync(id);
         }
 
-        public async Task<Usuarios> ObterOuCriar(string username, decimal salarioMensal)
+        public async Task<Usuarios> ObterOuCriar(CriarOuObterUserDTO dto)
         {
-            var user = await _userRepository.ObterPorUsernameAsync(username);
+            var user = await _userRepository.ObterPorUsernameAsync(dto.Username);
             if (user != null)
                 return user;
 
             var novoUsuario = new Usuarios
             {
-                Username = username,
-                SalarioMensal = salarioMensal
+                Username = dto.Username,
+                SalarioMensal = dto.SalarioMensal
             };
 
             return await _userRepository.AdicionarAsync(novoUsuario);
