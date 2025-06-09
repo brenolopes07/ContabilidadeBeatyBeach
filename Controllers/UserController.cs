@@ -1,4 +1,5 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs.HoraExtra;
+using ContabilidadeBeatyBeach.Domain.DTOs.User;
 using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace ContabilidadeBeatyBeach.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Usuarios>> CriarUsuario([FromBody] CriarOuObterUserDTO dto)
+        public async Task<ActionResult<Usuarios>> CriarUsuario([FromBody] CriarOuObterUserInputDTO dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Username) || dto.SalarioMensal <= 0)
                 return BadRequest("Dados Invalidos!");
@@ -35,12 +36,28 @@ namespace ContabilidadeBeatyBeach.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuarios>> ObterUsuarioPorId(int id)
+        public async Task<ActionResult> ObterUsuarioPorId(int id)
         {
             var usuario = await _userService.ObterPorIdAsync(id);
             if (usuario == null)
                 return NotFound("Usuario nao encontrado!");
-            return Ok(usuario);
+
+
+            var dto = new GetUsuarioOutputDTO
+            {
+                Id = usuario.Id,
+                Username = usuario.Username,
+                SalarioMensal = usuario.SalarioMensal,
+                HoraExtras = usuario.HoraExtras.Select(h => new HoraExtraOutputDTO
+                {
+                    Id = h.Id,
+                    Data = h.Data,
+                    QuantidadeHoras = h.QuantidadeHoras,                    
+                }).ToList()
+            };
+
+            return Ok(dto);
+
         }
 
     }

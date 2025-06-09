@@ -1,4 +1,4 @@
-﻿namespace ContabilidadeBeatyBeach.Domain.DTOs
+﻿namespace ContabilidadeBeatyBeach.Domain.DTOs.CalculoSalario
 {
     public class CalculoSalarioDTO
     {

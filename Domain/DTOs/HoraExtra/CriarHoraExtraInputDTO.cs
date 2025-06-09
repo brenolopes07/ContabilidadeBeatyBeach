@@ -1,8 +1,8 @@
 ﻿using ContabilidadeBeatyBeach.Domain.Entity.Enum;
 
-namespace ContabilidadeBeatyBeach.Domain.DTOs
+namespace ContabilidadeBeatyBeach.Domain.DTOs.HoraExtra
 {
-    public class CriarHoraExtraDTO
+    public class CriarHoraExtraInputDTO
     {
         public DateTime Data { get; set; }
         public decimal QuantidadeHoras { get; set; }

@@ -1,4 +1,4 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ namespace ContabilidadeBeatyBeach.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CriarHoraExtra([FromBody] CriarHoraExtraDTO dto)
+        public async Task<ActionResult> CriarHoraExtra([FromBody] CriarHoraExtraInputDTO dto)
         {
             var usuario = await _userService.ObterPorIdAsync(dto.UserId);
             if (usuario == null)
@@ -38,7 +38,11 @@ namespace ContabilidadeBeatyBeach.Controllers
 
             await _horaExtraService.AdicionarHoraExtraAsync(horaExtra);
 
-            return Ok("Hora Extra Cadastrada!");
+            return Ok(new
+            {
+                message = "Hora Extra cadastrada com sucesso!",
+                data = horaExtra
+            } );
         }
     }
 }

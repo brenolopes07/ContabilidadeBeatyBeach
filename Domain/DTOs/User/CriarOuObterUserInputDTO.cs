@@ -1,6 +1,6 @@
-﻿namespace ContabilidadeBeatyBeach.Domain.DTOs
+﻿namespace ContabilidadeBeatyBeach.Domain.DTOs.User
 {
-    public class CriarOuObterUserDTO
+    public class CriarOuObterUserInputDTO
     {
         public string Username { get; set; }
         public decimal SalarioMensal { get; set; } 

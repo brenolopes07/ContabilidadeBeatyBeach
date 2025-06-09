@@ -1,4 +1,4 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs.User;
 using ContabilidadeBeatyBeach.Domain.Entity;
 
 namespace ContabilidadeBeatyBeach.Service.Interface
@@ -8,7 +8,7 @@ namespace ContabilidadeBeatyBeach.Service.Interface
         Task<Usuarios?> ObterPorIdAsync(int id);
         decimal CalcularValorHora(decimal salarioMensal);
 
-        Task<Usuarios> ObterOuCriar(CriarOuObterUserDTO dto);
+        Task<Usuarios> ObterOuCriar(CriarOuObterUserInputDTO dto);
 
         
     }

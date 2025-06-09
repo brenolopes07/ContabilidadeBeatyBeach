@@ -1,4 +1,4 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs.CalculoSalario;
 using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Domain.Entity.Enum;
 using ContabilidadeBeatyBeach.Service.Interface;

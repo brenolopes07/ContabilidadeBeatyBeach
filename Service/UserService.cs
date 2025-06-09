@@ -1,4 +1,4 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs;
+﻿using ContabilidadeBeatyBeach.Domain.DTOs.User;
 using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
@@ -19,7 +19,7 @@ namespace ContabilidadeBeatyBeach.Service
             return await _userRepository.ObterPorIdAsync(id);
         }
 
-        public async Task<Usuarios> ObterOuCriar(CriarOuObterUserDTO dto)
+        public async Task<Usuarios> ObterOuCriar(CriarOuObterUserInputDTO dto)
         {
             var user = await _userRepository.ObterPorUsernameAsync(dto.Username);
             if (user != null)
