@@ -1,6 +1,6 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs.HoraExtra;
-using ContabilidadeBeatyBeach.Domain.DTOs.User;
-using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.Entity;
+using ContabilidadeBeatyBeach.DTOs.HoraExtra;
+using ContabilidadeBeatyBeach.DTOs.User;
 using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 

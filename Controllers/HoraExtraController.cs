@@ -1,5 +1,5 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs.HoraExtra;
-using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.Entity;
+using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,12 +36,12 @@ namespace ContabilidadeBeatyBeach.Controllers
                 UserId = dto.UserId
             };
 
-            await _horaExtraService.AdicionarHoraExtraAsync(horaExtra);
+            var resultado = _horaExtraService.AdicionarHoraExtraAsync(horaExtra);
 
             return Ok(new
             {
                 message = "Hora Extra cadastrada com sucesso!",
-                data = horaExtra
+                data = resultado
             } );
         }
     }
