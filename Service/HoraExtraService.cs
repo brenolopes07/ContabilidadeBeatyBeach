@@ -1,7 +1,9 @@
 ﻿using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Domain.Entity.Enum;
+using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
+using static ContabilidadeBeatyBeach.DTOs.HoraExtra.CriarHoraExtraOutputDTO;
 
 namespace ContabilidadeBeatyBeach.Service
 {
@@ -14,15 +16,33 @@ namespace ContabilidadeBeatyBeach.Service
             _horaextrarepository = horaextrarepository;
         }
 
-        public async Task<HoraExtra> AdicionarHoraExtraAsync(HoraExtra horaExtra)
+        public async Task<CriarHoraExtraOutputDTO> AdicionarHoraExtraAsync(HoraExtra horaExtra)
         {
-            return await _horaextrarepository.CriarAsync(horaExtra);
+
+            var novaHoraExtra = await _horaextrarepository.CriarAsync(horaExtra);
+
+            return new CriarHoraExtraOutputDTO
+            {
+                Id = novaHoraExtra.Id,
+                Data = novaHoraExtra.Data,
+                QuantidadeHoras = novaHoraExtra.QuantidadeHoras,
+                Tipo = novaHoraExtra.Tipo,
+                UserId = novaHoraExtra.UserId,
+                User = new UserSimplificadoDto
+                {
+                    Id = novaHoraExtra.User.Id,
+                    Username = novaHoraExtra.User.Username,
+                    SalarioMensal = novaHoraExtra.User.SalarioMensal,
+                    DataCadastro = novaHoraExtra.User.DataCadastro
+                }
+            };
+
         }
 
 
-        public async Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string data)
+        public async Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string mesAno)
         {
-            return await _horaextrarepository.ObterPorUsuarioEMesAsync(userId, data);
+            return await _horaextrarepository.ObterPorUsuarioEMesAsync(userId, mesAno);
         }
 
         public (decimal totalHoras, decimal totalValor) CalcularValores(List<HoraExtra> horaExtras, decimal valorHora)

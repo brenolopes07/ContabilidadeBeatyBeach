@@ -26,8 +26,11 @@ builder.Services.AddControllers()
     });
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IHoraExtraService, HoraExtraService>();
+builder.Services.AddScoped<ICalculoSalarioService, CalculoSalarioService>();
+builder.Services.AddScoped<IResumoMensalService, ResumoMensalService>();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IResumoMensalRepository, ResumoMensalRepository>();
 builder.Services.AddScoped<IHoraExtraRepository, HoraExtraRepository>();
 
 

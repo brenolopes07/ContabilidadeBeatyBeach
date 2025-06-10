@@ -1,5 +1,5 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs.User;
-using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.Entity;
+using ContabilidadeBeatyBeach.DTOs.User;
 
 namespace ContabilidadeBeatyBeach.Service.Interface
 {

@@ -1,11 +1,11 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs.CalculoSalario;
-using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.Entity;
+using ContabilidadeBeatyBeach.DTOs.CalculoSalario;
 
 namespace ContabilidadeBeatyBeach.Service.Interface
 {
     public interface ICalculoSalarioService
     {
-        Task<CalculoSalarioDTO> CalcularSalarioaAsync(int userId, string mes);
+        Task<CalculoSalarioOutputDTO> CalcularSalarioaAsync(int userId, string mes);
         Task<ResumoMensal> SalvarResumoAsync(int userId, string mes);
     }
 }

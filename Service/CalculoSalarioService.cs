@@ -1,6 +1,6 @@
-﻿using ContabilidadeBeatyBeach.Domain.DTOs.CalculoSalario;
-using ContabilidadeBeatyBeach.Domain.Entity;
+﻿using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.Domain.Entity.Enum;
+using ContabilidadeBeatyBeach.DTOs.CalculoSalario;
 using ContabilidadeBeatyBeach.Service.Interface;
 
 namespace ContabilidadeBeatyBeach.Service
@@ -18,32 +18,23 @@ namespace ContabilidadeBeatyBeach.Service
             _resumoMensalService = resumoMensalService;
         }
 
-        public async Task<CalculoSalarioDTO> CalcularSalarioaAsync(int userId, string mes)
+        public async Task<CalculoSalarioOutputDTO> CalcularSalarioaAsync(int userId, string mesAno)
         {
             var user = await _usuarioService.ObterPorIdAsync(userId);
             if (user == null) return null;
 
             var valorHora = _usuarioService.CalcularValorHora(user.SalarioMensal);
 
-            var HorasExtras = await _horaExtraService.ObterPorUsuarioEMesAsync(userId, mes);
+            var HorasExtras = await _horaExtraService.ObterPorUsuarioEMesAsync(userId, mesAno);
 
             var (totalHoras, totalValorExtra) = _horaExtraService.CalcularValores(HorasExtras, valorHora);
 
             var salarioTotal = user.SalarioMensal + totalValorExtra;
-
-            var horasExtrasDetalhadas = HorasExtras.Select(h => new HoraExtraDetalhadaDTO
-            {
-                Data = h.Data.ToString("dd/MM/yyyy"),
-                Tipo = h.Tipo.ToString(""),
-                QuantidadeHoras = h.QuantidadeHoras,
-                ValorHoraExtra = valorHora,
-                ValorCaculado = h.QuantidadeHoras * valorHora
-            }).ToList();
-
-            return new CalculoSalarioDTO
+          
+            return new CalculoSalarioOutputDTO
             {
                 Usuario = user.Username,
-                Mes = mes,
+                Mes = mesAno,
                 SalarioBase = user.SalarioMensal,
                 ValorHora = valorHora,
                 TotalHorasExtras = totalHoras,

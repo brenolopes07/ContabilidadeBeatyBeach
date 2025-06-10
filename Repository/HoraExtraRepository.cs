@@ -27,10 +27,17 @@ namespace ContabilidadeBeatyBeach.Repository
                 .ToListAsync();
         }
 
-        public async Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string data)
+        public async Task<List<HoraExtra>> ObterPorUsuarioEMesAsync(int userId, string mesAno)
         {
+            var partes = mesAno.Split('-');
+            int ano = int.Parse(partes[0]);
+            int mes = int.Parse(partes[1]);
+
+            var dataInicio = new DateTime(ano, mes, 1 );
+            var dataFim = dataInicio.AddMonths(1);
+
             return await _context.HoraExtra
-                .Where(h => h.UserId == userId && h.Data.ToString("yyyy-MM") == data)
+                .Where(h => h.UserId == userId && h.Data>= dataInicio && h.Data < dataFim)
                 .OrderByDescending(h => h.Data)
                 .ToListAsync();
         }
