@@ -30,7 +30,9 @@ namespace ContabilidadeBeatyBeach.Service
             var (totalHoras, totalValorExtra) = _horaExtraService.CalcularValores(HorasExtras, valorHora);
 
             var salarioTotal = user.SalarioMensal + totalValorExtra;
-          
+
+            await _resumoMensalService.SalvarOuAtualizarAsync(userId, mesAno, totalHoras, totalValorExtra, salarioTotal);
+
             return new CalculoSalarioOutputDTO
             {
                 Usuario = user.Username,
@@ -43,16 +45,6 @@ namespace ContabilidadeBeatyBeach.Service
             };
         }
 
-        public async Task<ResumoMensal> SalvarResumoAsync(int userId, string mes)
-        {
-            var usuario = await _usuarioService.ObterPorIdAsync(userId);
-            if (usuario == null) return null;
-
-            var valorHora = _usuarioService.CalcularValorHora(usuario.SalarioMensal);
-            var horasExtras = await _horaExtraService.ObterPorUsuarioEMesAsync(userId, mes);
-            var (totalHoras, totalExtra) = _horaExtraService.CalcularValores(horasExtras, valorHora);
-
-            return await _resumoMensalService.SalvarOuAtualizarAsync(userId, mes, totalHoras, totalExtra);
         }
     }
-}
+

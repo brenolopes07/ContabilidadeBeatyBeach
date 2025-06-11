@@ -3,7 +3,6 @@ using ContabilidadeBeatyBeach.Domain.Entity.Enum;
 using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
-using static ContabilidadeBeatyBeach.DTOs.HoraExtra.CriarHoraExtraOutputDTO;
 
 namespace ContabilidadeBeatyBeach.Service
 {

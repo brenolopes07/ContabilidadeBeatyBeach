@@ -6,6 +6,6 @@ namespace ContabilidadeBeatyBeach.Service.Interface
     public interface ICalculoSalarioService
     {
         Task<CalculoSalarioOutputDTO> CalcularSalarioaAsync(int userId, string mes);
-        Task<ResumoMensal> SalvarResumoAsync(int userId, string mes);
+
     }
 }
