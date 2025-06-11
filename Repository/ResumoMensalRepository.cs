@@ -13,10 +13,10 @@ namespace ContabilidadeBeatyBeach.Repository
         {
             _context = context;
         }
-        public async Task<ResumoMensal?> ObterPorUsuarioEMesAsync(int UserId, string mes)
+        public async Task<ResumoMensal?> ObterPorUsuarioEMesAsync(int UserId, string mesAno)
         {
-            return await _context.ResumoMensal
-                .FirstOrDefaultAsync(r => r.UserId == UserId && r.Mes == mes);
+            return await _context.ResumoMensal              
+                .FirstOrDefaultAsync(r => r.UserId == UserId && r.Mes == mesAno);
         }
 
         public async Task<List<ResumoMensal>> ObterPorUsuarioAsync(int UserId)
