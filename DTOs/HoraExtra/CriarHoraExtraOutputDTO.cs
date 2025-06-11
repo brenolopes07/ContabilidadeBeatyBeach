@@ -1,5 +1,4 @@
-﻿using ContabilidadeBeatyBeach.Domain.Entity;
-using ContabilidadeBeatyBeach.Domain.Entity.Enum;
+﻿using ContabilidadeBeatyBeach.Domain.Entity.Enum;
 
 namespace ContabilidadeBeatyBeach.DTOs.HoraExtra
 {
