@@ -19,7 +19,7 @@ namespace ContabilidadeBeatyBeach.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CriarHoraExtra([FromBody] CriarHoraExtraInputDTO dto)
+        public async Task<ActionResult<CriarHoraExtraOutputDTO>> CriarHoraExtra([FromBody] CriarHoraExtraInputDTO dto)
         {
             var usuario = await _userService.ObterPorIdAsync(dto.UserId);
             if (usuario == null)
@@ -36,7 +36,7 @@ namespace ContabilidadeBeatyBeach.Controllers
                 UserId = dto.UserId
             };
 
-            var resultado = _horaExtraService.AdicionarHoraExtraAsync(horaExtra);
+            var resultado = await _horaExtraService.AdicionarHoraExtraAsync(horaExtra);
 
             return Ok(new
             {

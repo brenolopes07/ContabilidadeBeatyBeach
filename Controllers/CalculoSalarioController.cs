@@ -25,5 +25,6 @@ namespace ContabilidadeBeatyBeach.Controllers
                 return NotFound("Usuario ou mes nao encontrado!");
             return Ok(resultado);
         }
+
     }
 }
