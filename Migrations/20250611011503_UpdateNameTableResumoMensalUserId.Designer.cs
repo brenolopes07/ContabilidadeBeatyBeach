@@ -4,6 +4,7 @@ using ContabilidadeBeatyBeach.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContabilidadeBeatyBeach.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250611011503_UpdateNameTableResumoMensalUserId")]
+    partial class UpdateNameTableResumoMensalUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +64,6 @@ namespace ContabilidadeBeatyBeach.Migrations
                         .IsRequired()
                         .HasMaxLength(7)
                         .HasColumnType("varchar(7)");
-
-                    b.Property<decimal>("SalarioTotal")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("TotalExtra")
                         .HasColumnType("decimal(18,2)");

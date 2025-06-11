@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContabilidadeBeatyBeach.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250608192638_AddUserIdToResumoMensal")]
-    partial class AddUserIdToResumoMensal
+    [Migration("20250611014900_AddSalarioTotalinResumoMensalTable")]
+    partial class AddSalarioTotalinResumoMensalTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,9 @@ namespace ContabilidadeBeatyBeach.Migrations
                         .IsRequired()
                         .HasMaxLength(7)
                         .HasColumnType("varchar(7)");
+
+                    b.Property<decimal>("SalarioTotal")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("TotalExtra")
                         .HasColumnType("decimal(18,2)");
