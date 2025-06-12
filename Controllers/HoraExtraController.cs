@@ -44,5 +44,19 @@ namespace ContabilidadeBeatyBeach.Controllers
                 data = resultado
             } );
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletarHoraExtra(int id)
+        {
+            if (id <= 0)
+                return BadRequest("ID invalido!");
+
+            var resultado = await _horaExtraService.DeletarHoraExtra(id);
+
+            if (resultado == null)
+                return NotFound("Hora extra nao encontrada!");
+
+            return Ok(resultado);
+        }
     }
 }
