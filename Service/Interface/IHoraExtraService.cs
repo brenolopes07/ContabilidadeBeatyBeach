@@ -9,5 +9,7 @@ namespace ContabilidadeBeatyBeach.Service.Interface
         (decimal totalHoras, decimal totalValor) CalcularValores(List<HoraExtra> horasExtras, decimal valorHora);
 
         Task<CriarHoraExtraOutputDTO> AdicionarHoraExtraAsync(HoraExtra horaExtra);
+
+        Task<DeletarHoraExtraDTO> DeletarHoraExtra(int id);
     }
 }

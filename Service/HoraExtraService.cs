@@ -4,6 +4,7 @@ using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
 
+
 namespace ContabilidadeBeatyBeach.Service
 {
     public class HoraExtraService : IHoraExtraService
@@ -60,6 +61,24 @@ namespace ContabilidadeBeatyBeach.Service
                 
             }
             return (totalHoras, totalValor);
+        }
+        public async Task<DeletarHoraExtraDTO> DeletarHoraExtra(int id)
+        {
+            var horaExtraExistente = await _horaextrarepository.ObterPorIdAsync(id);
+
+            if (horaExtraExistente == null)
+            {
+                throw new Exception("Esse registro de hora extra nao existe!");
+            }
+
+            await _horaextrarepository.DeletarAsync(id);
+
+            return new DeletarHoraExtraDTO
+            {
+                Message = "Registro de hora extra deletado com sucesso!",
+                HoraExtraDeletada = horaExtraExistente
+            };
+
         }
 
         
