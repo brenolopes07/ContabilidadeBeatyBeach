@@ -4,7 +4,6 @@ using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.Repository.Interface;
 using ContabilidadeBeatyBeach.Service.Interface;
 
-
 namespace ContabilidadeBeatyBeach.Service
 {
     public class HoraExtraService : IHoraExtraService
