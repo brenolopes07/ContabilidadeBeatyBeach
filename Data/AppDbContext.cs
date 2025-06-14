@@ -10,6 +10,7 @@ namespace ContabilidadeBeatyBeach.Data
         public DbSet<Usuarios> Usuarios { get; set; }   
         public DbSet<HoraExtra> HoraExtra { get; set; }
         public DbSet<ResumoMensal> ResumoMensal { get; set; }
+        public DbSet<Comissoes> Comissoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -76,6 +77,22 @@ namespace ContabilidadeBeatyBeach.Data
                 entity.Property(r => r.TotalExtra)
                     .IsRequired()
                     .HasColumnType("decimal(18,2)");
+            });
+
+            modelBuilder.Entity<Comissoes>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+
+                entity.Property(c => c.Data)
+                .IsRequired();
+
+                entity.Property(c => c.Valor)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+                entity.Property(c => c.Descricao)
+                .IsRequired()
+                .HasMaxLength(255);
             });
 
         }

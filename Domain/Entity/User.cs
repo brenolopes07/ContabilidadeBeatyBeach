@@ -15,5 +15,7 @@ namespace ContabilidadeBeatyBeach.Domain.Entity
 
         public List<HoraExtra> HoraExtras { get; set; }
         public List<ResumoMensal> ResumoMensal { get; set; }
+
+        public List<Comissoes> Comissoes { get; set; }
     }
 }
