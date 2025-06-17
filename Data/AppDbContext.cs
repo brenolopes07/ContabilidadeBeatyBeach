@@ -70,13 +70,19 @@ namespace ContabilidadeBeatyBeach.Data
                     .IsRequired()
                     .HasMaxLength(7); 
 
-                entity.Property(r => r.TotalHoras)
-                    .IsRequired()
+                entity.Property(r => r.TotalHoras)                    
                     .HasColumnType("decimal(18,2)");
 
-                entity.Property(r => r.TotalExtra)
-                    .IsRequired()
+                entity.Property(r => r.TotalExtra)  
                     .HasColumnType("decimal(18,2)");
+
+                entity.Property(r => r.TotalComissoes)                    
+                    .HasColumnType("decimal(18,2)");
+
+                entity.Property(r => r.SalarioTotal)
+                    .IsRequired()
+                    .HasColumnType("decimal(65,30)");
+                
             });
 
             modelBuilder.Entity<Comissoes>(entity =>
