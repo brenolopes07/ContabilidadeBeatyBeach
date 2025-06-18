@@ -43,6 +43,11 @@ namespace ContabilidadeBeatyBeach.Data
                     .WithOne(r => r.Usuario)
                     .HasForeignKey(r => r.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasMany(u => u.Comissoes)
+                    .WithOne(c => c.Usuario)
+                    .HasForeignKey(c => c.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<HoraExtra>(entity =>
