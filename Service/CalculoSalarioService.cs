@@ -10,12 +10,14 @@ namespace ContabilidadeBeatyBeach.Service
         private readonly IUserService _usuarioService;
         private readonly IHoraExtraService _horaExtraService;
         private readonly IResumoMensalService _resumoMensalService;
+        private readonly IComissoesService _comissoesservice;
 
-        public CalculoSalarioService(IUserService usuarioService, IHoraExtraService horaExtraService, IResumoMensalService resumoMensalService)
+        public CalculoSalarioService(IUserService usuarioService, IHoraExtraService horaExtraService, IResumoMensalService resumoMensalService, IComissoesService comissoesservice )
         {
             _usuarioService = usuarioService;
             _horaExtraService = horaExtraService;
             _resumoMensalService = resumoMensalService;
+            _comissoesservice = comissoesservice;
         }
 
         public async Task<CalculoSalarioOutputDTO> CalcularSalarioaAsync(int userId, string mesAno)
@@ -27,11 +29,19 @@ namespace ContabilidadeBeatyBeach.Service
 
             var HorasExtras = await _horaExtraService.ObterPorUsuarioEMesAsync(userId, mesAno);
 
+            var comissoes = await _comissoesservice.ObterComissoesPorUsuarioEMesAsync(userId, mesAno);
+    
+            var totalComissoes =  _comissoesservice.CalcularTotalComissoes(comissoes);
+            if(comissoes == null)
+            {
+                totalComissoes = 0;
+            }
+
             var (totalHoras, totalValorExtra) = _horaExtraService.CalcularValores(HorasExtras, valorHora);
 
-            var salarioTotal = user.SalarioMensal + totalValorExtra;
+            var salarioTotal = user.SalarioMensal + totalValorExtra +  totalComissoes;
 
-            await _resumoMensalService.SalvarOuAtualizarAsync(userId, mesAno, totalHoras, totalValorExtra, salarioTotal);
+            await _resumoMensalService.SalvarOuAtualizarAsync(userId, mesAno, totalHoras, totalValorExtra,totalComissoes, salarioTotal);
 
             return new CalculoSalarioOutputDTO
             {
@@ -41,6 +51,7 @@ namespace ContabilidadeBeatyBeach.Service
                 ValorHora = valorHora,
                 TotalHorasExtras = totalHoras,
                 ValorHorasExtras = totalValorExtra,
+                TotalComissoes = totalComissoes,
                 SalarioTotal = salarioTotal,
             };
         }

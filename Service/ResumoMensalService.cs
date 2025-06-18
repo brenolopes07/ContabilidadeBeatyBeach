@@ -19,7 +19,7 @@ namespace ContabilidadeBeatyBeach.Service
             return await _resumomensalrepository.ObterPorUsuarioEMesAsync(userId, mesAno);
         }
 
-        public async Task<ResumoMensal> SalvarOuAtualizarAsync(int userId, string mesAno, decimal totalHoras, decimal totalExtra, decimal salarioTotal)
+        public async Task<ResumoMensal> SalvarOuAtualizarAsync(int userId, string mesAno, decimal totalHoras, decimal totalExtra,decimal totalComissoes, decimal salarioTotal)
         {
             
             var existente = await _resumomensalrepository.ObterPorUsuarioEMesAsync(userId, mesAno);
@@ -29,6 +29,7 @@ namespace ContabilidadeBeatyBeach.Service
                 
                 existente.TotalHoras = totalHoras;
                 existente.TotalExtra = totalExtra;
+                existente.TotalComissoes = totalComissoes;
                 existente.SalarioTotal = salarioTotal;
 
                 
@@ -43,6 +44,7 @@ namespace ContabilidadeBeatyBeach.Service
                     Mes = mesAno,
                     TotalHoras = totalHoras,
                     TotalExtra = totalExtra,
+                    TotalComissoes = totalComissoes,
                     SalarioTotal = salarioTotal
                 };
                
