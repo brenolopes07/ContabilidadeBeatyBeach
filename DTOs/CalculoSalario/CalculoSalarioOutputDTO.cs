@@ -8,6 +8,7 @@
         public decimal ValorHora { get; set; }
         public decimal TotalHorasExtras { get; set; }
         public decimal ValorHorasExtras { get; set; }
+        public decimal TotalComissoes { get; set; }
         public decimal SalarioTotal { get; set; }
         
     }
