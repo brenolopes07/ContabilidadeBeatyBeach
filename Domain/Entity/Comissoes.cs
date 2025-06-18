@@ -8,6 +8,6 @@
         public DateTime Data { get; set; }
         public string Descricao { get; set; }
        
-        public virtual Usuarios Usuarios { get; set; } 
+        public virtual Usuarios Usuario { get; set; } 
     }
 }
