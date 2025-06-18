@@ -28,6 +28,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResumoMensalRepository, ResumoMensalRepository>();
 builder.Services.AddScoped<IHoraExtraRepository, HoraExtraRepository>();
+builder.Services.AddScoped<IComissoesService, ComissoesService>();
+builder.Services.AddScoped<IComissoesRepository, ComissoesRepository>();
 
 
 var app = builder.Build();
