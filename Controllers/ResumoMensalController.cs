@@ -15,7 +15,6 @@ namespace ContabilidadeBeatyBeach.Controllers
         }
 
         [HttpGet]
-
         public async Task<ActionResult> ObterResumoMensal(int userId, string mesAno)
         {
             var resumo = await _resumomensalservice.ObterPorUsuarioEMesAsync(userId, mesAno);
