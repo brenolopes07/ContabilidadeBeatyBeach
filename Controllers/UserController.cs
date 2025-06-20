@@ -1,4 +1,5 @@
 ﻿using ContabilidadeBeatyBeach.Domain.Entity;
+using ContabilidadeBeatyBeach.DTOs.ComissoesDTO;
 using ContabilidadeBeatyBeach.DTOs.HoraExtra;
 using ContabilidadeBeatyBeach.DTOs.User;
 using ContabilidadeBeatyBeach.Service.Interface;
@@ -48,12 +49,19 @@ namespace ContabilidadeBeatyBeach.Controllers
                 Id = usuario.Id,
                 Username = usuario.Username,
                 SalarioMensal = usuario.SalarioMensal,
-                HoraExtras = usuario.HoraExtras.Select(h => new HoraExtraOutputDTO
+                HoraExtras = usuario.HoraExtras?.Select(h => new HoraExtraOutputDTO
                 {
                     Id = h.Id,
                     Data = h.Data,
-                    QuantidadeHoras = h.QuantidadeHoras,                    
-                }).ToList()
+                    QuantidadeHoras = h.QuantidadeHoras,
+                }).ToList(),
+                 Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
+                 {
+                     Id = c.Id,
+                     Data = c.Data,
+                     Valor = c.Valor,
+                     Descricao = c.Descricao
+                 }).ToList()
             };
 
             return Ok(dto);
