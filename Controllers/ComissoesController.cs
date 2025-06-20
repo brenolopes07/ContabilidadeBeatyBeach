@@ -46,6 +46,33 @@ namespace ContabilidadeBeatyBeach.Controllers
                 data = resultado
             });
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Comissoes>>> ObterComissoesPorUsuarioEMes(int userId, string mesAno)
+        {
+            var comissoes = await _comissoesService.ObterComissoesPorUsuarioEMesAsync(userId, mesAno);
+            if (comissoes == null || comissoes.Count == 0)
+            {
+                return NotFound("Nenhuma comissão encontrada para o usuário e mês especificados.");
+            }
+
+            return Ok(comissoes);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Comissoes>> DeletarComissao(int id)
+        {
+            if(id <=0)
+                return BadRequest("Id inválido!");
+            var comissao = await _comissoesService.DeletarComissaoAsync(id);
+
+            return Ok(new
+            {
+                message = "Comissão deletada com sucesso!",
+                data = comissao
+            });
+        }
+
     }
 }
 
