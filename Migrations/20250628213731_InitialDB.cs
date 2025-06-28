@@ -33,6 +33,30 @@ namespace ContabilidadeBeatyBeach.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Comissoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comissoes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comissoes_Usuarios_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "HoraExtra",
                 columns: table => new
                 {
@@ -63,16 +87,18 @@ namespace ContabilidadeBeatyBeach.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Mes = table.Column<string>(type: "varchar(7)", maxLength: 7, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TotalHoras = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TotalExtra = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                    TotalHoras = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    TotalExtra = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    TotalComissoes = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    SalarioTotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ResumoMensal", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResumoMensal_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_ResumoMensal_Usuarios_UserId",
+                        column: x => x.UserId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -80,12 +106,17 @@ namespace ContabilidadeBeatyBeach.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comissoes_UserId",
+                table: "Comissoes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HoraExtra_UserId",
                 table: "HoraExtra",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResumoMensal_UsuarioId",
+                name: "IX_ResumoMensal_UserId",
                 table: "ResumoMensal",
                 column: "UserId");
 
@@ -99,6 +130,9 @@ namespace ContabilidadeBeatyBeach.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comissoes");
+
             migrationBuilder.DropTable(
                 name: "HoraExtra");
 

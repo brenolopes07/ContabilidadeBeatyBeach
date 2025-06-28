@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContabilidadeBeatyBeach.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250611014900_AddSalarioTotalinResumoMensalTable")]
-    partial class AddSalarioTotalinResumoMensalTable
+    [Migration("20250628213731_InitialDB")]
+    partial class InitialDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,35 @@ namespace ContabilidadeBeatyBeach.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("ContabilidadeBeatyBeach.Domain.Entity.Comissoes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comissoes");
+                });
 
             modelBuilder.Entity("ContabilidadeBeatyBeach.Domain.Entity.HoraExtra", b =>
                 {
@@ -68,10 +97,13 @@ namespace ContabilidadeBeatyBeach.Migrations
                     b.Property<decimal>("SalarioTotal")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("TotalExtra")
+                    b.Property<decimal?>("TotalComissoes")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("TotalHoras")
+                    b.Property<decimal?>("TotalExtra")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("TotalHoras")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
@@ -113,6 +145,17 @@ namespace ContabilidadeBeatyBeach.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("ContabilidadeBeatyBeach.Domain.Entity.Comissoes", b =>
+                {
+                    b.HasOne("ContabilidadeBeatyBeach.Domain.Entity.Usuarios", "Usuario")
+                        .WithMany("Comissoes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("ContabilidadeBeatyBeach.Domain.Entity.HoraExtra", b =>
                 {
                     b.HasOne("ContabilidadeBeatyBeach.Domain.Entity.Usuarios", "User")
@@ -137,6 +180,8 @@ namespace ContabilidadeBeatyBeach.Migrations
 
             modelBuilder.Entity("ContabilidadeBeatyBeach.Domain.Entity.Usuarios", b =>
                 {
+                    b.Navigation("Comissoes");
+
                     b.Navigation("HoraExtras");
 
                     b.Navigation("ResumoMensal");
