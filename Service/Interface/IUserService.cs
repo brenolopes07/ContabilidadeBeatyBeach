@@ -7,6 +7,7 @@ namespace ContabilidadeBeatyBeach.Service.Interface
     {
         Task<Usuarios?> ObterPorIdAsync(int id);
         decimal CalcularValorHora(decimal salarioMensal);
+        Task<Usuarios?> ObterPorUsernameAsync(string username);
 
         Task<Usuarios> ObterOuCriar(CriarOuObterUserInputDTO dto);
 

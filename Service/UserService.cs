@@ -19,6 +19,11 @@ namespace ContabilidadeBeatyBeach.Service
             return await _userRepository.ObterPorIdAsync(id);
         }
 
+        public async Task<Usuarios?> ObterPorUsernameAsync(string username)
+        {
+            return await _userRepository.ObterPorUsernameAsync(username);
+        }
+
         public async Task<Usuarios> ObterOuCriar(CriarOuObterUserInputDTO dto)
         {
             var user = await _userRepository.ObterPorUsernameAsync(dto.Username);
