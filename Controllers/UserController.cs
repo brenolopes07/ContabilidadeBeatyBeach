@@ -55,17 +55,26 @@ namespace ContabilidadeBeatyBeach.Controllers
                     Data = h.Data,
                     QuantidadeHoras = h.QuantidadeHoras,
                 }).ToList(),
-                 Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
-                 {
-                     Id = c.Id,
-                     Data = c.Data,
-                     Valor = c.Valor,
-                     Descricao = c.Descricao
-                 }).ToList()
+                Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
+                {
+                    Id = c.Id,
+                    Data = c.Data,
+                    Valor = c.Valor,
+                    Descricao = c.Descricao
+                }).ToList()
             };
 
             return Ok(dto);
 
+        }
+        [HttpGet]
+        public async Task<ActionResult> ObterUsuarioPorUsername([FromQuery] string username)
+        {
+            var usuario = await _userService.ObterPorUsernameAsync(username);
+            if(usuario == null)
+                return NotFound("Usuario nao encontrado!");
+
+            return Ok(usuario);
         }
 
     }
