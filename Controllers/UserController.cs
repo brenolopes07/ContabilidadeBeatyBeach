@@ -1,6 +1,7 @@
 ﻿using ContabilidadeBeatyBeach.Domain.Entity;
 using ContabilidadeBeatyBeach.DTOs.ComissoesDTO;
 using ContabilidadeBeatyBeach.DTOs.HoraExtra;
+using ContabilidadeBeatyBeach.DTOs.ResumoMensalDTO;
 using ContabilidadeBeatyBeach.DTOs.User;
 using ContabilidadeBeatyBeach.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace ContabilidadeBeatyBeach.Controllers
                 return BadRequest("Dados Invalidos!");
 
             var usuario = await _userService.ObterOuCriar(dto);
-            var valorHora = _userService.CalcularValorHora(usuario.SalarioMensal);
+            var valorHora = _userService.CalcularValorHora(usuario.SalarioMensal);  
 
             return Ok(new
             {
@@ -61,6 +62,16 @@ namespace ContabilidadeBeatyBeach.Controllers
                     Data = c.Data,
                     Valor = c.Valor,
                     Descricao = c.Descricao
+                }).ToList(),
+                ResumoMensal = usuario.ResumoMensal?.Select(r => new GetResumoMensalDTO
+                {
+                    Id = r.Id,
+                    mesAno = r.Mes, 
+                    TotalHoras = r.TotalHoras,
+                    TotalExtra = r.TotalExtra,
+                    TotalComissoes = r.TotalComissoes,
+                    SalarioTotal = r.SalarioTotal
+
                 }).ToList()
             };
 
@@ -74,7 +85,36 @@ namespace ContabilidadeBeatyBeach.Controllers
             if(usuario == null)
                 return NotFound("Usuario nao encontrado!");
 
-            return Ok(usuario);
+            var dto = new GetUsuarioOutputDTO
+            {
+                Id = usuario.Id,
+                Username = usuario.Username,
+                SalarioMensal = usuario.SalarioMensal,
+                HoraExtras = usuario.HoraExtras?.Select(h => new HoraExtraOutputDTO
+                {
+                    Id = h.Id,
+                    Data = h.Data,
+                    QuantidadeHoras = h.QuantidadeHoras,
+                }).ToList(),
+                Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
+                {
+                    Id = c.Id,
+                    Data = c.Data,
+                    Valor = c.Valor,
+                    Descricao = c.Descricao
+                }).ToList(),
+                ResumoMensal = usuario.ResumoMensal?.Select(r => new GetResumoMensalDTO
+                {
+                    Id = r.Id,
+                    mesAno = r.Mes,
+                    TotalHoras = r.TotalHoras,
+                    TotalExtra = r.TotalExtra,
+                    TotalComissoes = r.TotalComissoes,
+                    SalarioTotal = r.SalarioTotal
+                }).ToList()
+            };
+
+            return Ok(dto);
         }
 
     }

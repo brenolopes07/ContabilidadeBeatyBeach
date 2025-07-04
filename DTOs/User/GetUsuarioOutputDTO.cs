@@ -1,5 +1,6 @@
 ﻿using ContabilidadeBeatyBeach.DTOs.ComissoesDTO;
 using ContabilidadeBeatyBeach.DTOs.HoraExtra;
+using ContabilidadeBeatyBeach.DTOs.ResumoMensalDTO;
 
 namespace ContabilidadeBeatyBeach.DTOs.User
 {
@@ -12,5 +13,8 @@ namespace ContabilidadeBeatyBeach.DTOs.User
         public List<HoraExtraOutputDTO>? HoraExtras { get; set; }
 
         public List<GetComissoesOutputDTO>? Comissoes { get; set; }
+
+        public List<GetResumoMensalDTO>? ResumoMensal { get; set; }
+
     }
 }
