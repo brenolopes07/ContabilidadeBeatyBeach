@@ -18,12 +18,20 @@ namespace ContabilidadeBeatyBeach.Repository
         {
             return await _context.Usuarios
             .Include(u => u.HoraExtras)
+            .Include(u => u.Comissoes)
+            .Include(u => u.ResumoMensal)
             .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuarios> ObterPorUsernameAsync(string username)
         {
-            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Usuarios
+                .Include(u => u.HoraExtras)
+                .Include(u => u.Comissoes)
+                .Include(u => u.ResumoMensal)
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            return user;
         }
 
         public async Task<List<Usuarios>> ObterTodosAsync()
