@@ -50,29 +50,6 @@ namespace ContabilidadeBeatyBeach.Controllers
                 Id = usuario.Id,
                 Username = usuario.Username,
                 SalarioMensal = usuario.SalarioMensal,
-                HoraExtras = usuario.HoraExtras?.Select(h => new HoraExtraOutputDTO
-                {
-                    Id = h.Id,
-                    Data = h.Data,
-                    QuantidadeHoras = h.QuantidadeHoras,
-                }).ToList(),
-                Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
-                {
-                    Id = c.Id,
-                    Data = c.Data,
-                    Valor = c.Valor,
-                    Descricao = c.Descricao
-                }).ToList(),
-                ResumoMensal = usuario.ResumoMensal?.Select(r => new GetResumoMensalDTO
-                {
-                    Id = r.Id,
-                    mesAno = r.Mes, 
-                    TotalHoras = r.TotalHoras,
-                    TotalExtra = r.TotalExtra,
-                    TotalComissoes = r.TotalComissoes,
-                    SalarioTotal = r.SalarioTotal
-
-                }).ToList()
             };
 
             return Ok(dto);
@@ -89,29 +66,7 @@ namespace ContabilidadeBeatyBeach.Controllers
             {
                 Id = usuario.Id,
                 Username = usuario.Username,
-                SalarioMensal = usuario.SalarioMensal,
-                HoraExtras = usuario.HoraExtras?.Select(h => new HoraExtraOutputDTO
-                {
-                    Id = h.Id,
-                    Data = h.Data,
-                    QuantidadeHoras = h.QuantidadeHoras,
-                }).ToList(),
-                Comissoes = usuario.Comissoes?.Select(c => new GetComissoesOutputDTO
-                {
-                    Id = c.Id,
-                    Data = c.Data,
-                    Valor = c.Valor,
-                    Descricao = c.Descricao
-                }).ToList(),
-                ResumoMensal = usuario.ResumoMensal?.Select(r => new GetResumoMensalDTO
-                {
-                    Id = r.Id,
-                    mesAno = r.Mes,
-                    TotalHoras = r.TotalHoras,
-                    TotalExtra = r.TotalExtra,
-                    TotalComissoes = r.TotalComissoes,
-                    SalarioTotal = r.SalarioTotal
-                }).ToList()
+                SalarioMensal = usuario.SalarioMensal,       
             };
 
             return Ok(dto);
