@@ -10,11 +10,6 @@ namespace ContabilidadeBeatyBeach.DTOs.User
         public string Username { get; set; } 
 
         public decimal SalarioMensal { get; set; }
-        public List<HoraExtraOutputDTO>? HoraExtras { get; set; }
-
-        public List<GetComissoesOutputDTO>? Comissoes { get; set; }
-
-        public List<GetResumoMensalDTO>? ResumoMensal { get; set; }
 
     }
 }
